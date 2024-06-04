@@ -105,21 +105,21 @@ if json_file and excel_file:
         with st.form("form?"):
             st.write("Saving As")
             filename = st.text_input("Output File Name", "example")
-            submit = st.form_submit_button("Download Excel big file")
-        if submit:
-            st.download_button(
-                label="Download Excel",
-                data=output,
-                file_name= f"{filename}.xlsx",
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                type="primary"
-            )
+#            submit = st.form_submit_button("Download Excel big file")
+ #       if submit:
+  #          st.download_button(
+   #             label="Download Excel",
+    #            data=output,
+     #           file_name= f"{filename}.xlsx",
+     #           mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      #          type="primary"
+       #     )
 
         # Provide a download button for the resulting dataframe
-#        st.download_button(
-#            label="Download Excel",
-#            data=output,
-#            file_name= f"{filename}.xlsx",
-#            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-#            type="primary"
-#        )
+        st.download_button(
+            label="Download Excel",
+            data=output,
+            file_name= f"{filename}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            type="primary"
+        )
