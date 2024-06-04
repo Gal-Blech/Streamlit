@@ -1,7 +1,14 @@
 import streamlit as st
 import pandas as pd
 import json
-import io
+from io import BytesIO
+
+# Ensure openpyxl is available
+try:
+    import openpyxl
+except ImportError:
+    st.error("The 'openpyxl' library is required to run this app. Please install it by running `pip install openpyxl`.")
+    st.stop()
 
 # Function to process files
 def process_files(json_file, excel_file):
@@ -88,7 +95,7 @@ st.title("JSON & MOT Excel to Arranged Excel")
 
 # File uploaders
 json_file = st.file_uploader("Upload JSON File", type="json")
-excel_file = st.file_uploader("Upload Excel File", type=["xlsx", "xls"])
+excel_file = st.file_uploader("Upload Excel File", type="xlsx")
 
 if json_file and excel_file:
     df = process_files(json_file, excel_file)
@@ -96,10 +103,15 @@ if json_file and excel_file:
         st.success("Data processed successfully.")
         st.dataframe(df)
 
+        # Convert DataFrame to a binary stream
+        output = BytesIO()
+        df.to_excel(output, index=False, engine='openpyxl')
+        output.seek(0)
+
         # Provide a download button for the resulting dataframe
         st.download_button(
             label="Download Excel",
-            data=df.to_excel(index=False),
+            data=output,
             file_name="processed_data.xlsx",
-            mime="application/vnd.ms-excel"
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
