@@ -2,13 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 from io import BytesIO
-
-# Ensure openpyxl is available
-try:
-    import openpyxl
-except ImportError:
-    st.error("The 'openpyxl' library is required to run this app. Please install it by running `pip install openpyxl`.")
-    st.stop()
+import openpyxl
 
 # Function to process files
 def process_files(json_file, excel_file):
