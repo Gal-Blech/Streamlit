@@ -104,8 +104,9 @@ if json_file and excel_file:
 
         # Provide a download button for the resulting dataframe
 
-        filename = st.text_input("Output File Name", "**example**")
-        st.write("The Excel file will be named:  ", filename, "**.xlsx**")
+        filename = st.text_input("Output File Name", "")
+ #       filename_bold = st.markdown(
+        st.write("The Excel file will be named:  **{filename}.xlsx**")
 
 
 
