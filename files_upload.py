@@ -113,5 +113,6 @@ if json_file and excel_file:
             label="Download Excel",
             data=output,
             file_name="processed_data.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            type="primary"
         )
