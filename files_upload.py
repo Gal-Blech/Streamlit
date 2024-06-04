@@ -100,5 +100,5 @@ if json_file and excel_file:
             label="Download Excel",
             data=df.to_excel(index=False),
             file_name="processed_data.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            mime="application/vnd.ms-excel"
         )
