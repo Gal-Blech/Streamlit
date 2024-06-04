@@ -106,7 +106,7 @@ if json_file and excel_file:
 
         filename = st.text_input("Output File Name", "")
  #       filename_bold = st.markdown(
-        st.write("The Excel file will be named:  **{filename}.xlsx**")
+        st.write(f"The Excel file will be named:  **{filename}.xlsx**")
 
 
 
