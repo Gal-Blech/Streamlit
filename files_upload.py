@@ -102,13 +102,8 @@ if json_file and excel_file:
         df.to_excel(output, index=False, engine='openpyxl')
         output.seek(0)
 
-        # Provide a download button for the resulting dataframe
-
-        filename = st.text_input("Output File Name", "")
- #       filename_bold = st.markdown(
-        st.write(f"The Excel file will be named:  **{filename}.xlsx**")
-
-
+        filename = st.text_input("Output File Name", "processed_data")
+        st.write(f"The Excel file will be named: **{filename}.xlsx**")
 
         # Provide a download button for the resulting dataframe
         st.download_button(
