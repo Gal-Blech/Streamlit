@@ -186,8 +186,12 @@ def to_json_pref_3(df):
 
 
 
-# Streamlit UI
-st.title("Creating frequencies using JSON & MOT Excel")
+
+#### Streamlit UI:
+
+st.title("MOT special service frequencies", anchor=False)
+st.header("Creating text file of MOT's frequencies using timeplan JSON and the MOT Excel", anchor=False)
+st.subheader("The text should be paste in the timeplan's preferences", anchor=False)
 
 # File uploaders
 with st.container(border=True):
