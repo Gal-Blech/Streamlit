@@ -187,7 +187,7 @@ def to_json_pref_3(df):
 
 
 # Streamlit UI
-st.title("JSON & MOT Excel to Arranged Excel")
+st.title("Creating frequencies using JSON & MOT Excel")
 
 # File uploaders
 json_file = st.file_uploader("Upload JSON File", type="json")
@@ -227,30 +227,30 @@ if json_file and excel_file:
         
         if option == 'JSON ver 2':
             json_data = to_json_pref_2(df)
-
-            ##### creating JSON file !!! ######
+            json_str = json.dumps(json_data, indent=4)
+            json_bytes = json_str.encode('utf-8')
 
             st.write(f"The JSON file will be named: **{filename}.txt**")
 
             # Provide a download button for the resulting dataframe
             st.download_button(
                 label="Download JSON as text file",
-                data=json_data,
+                data=json_bytes,
                 file_name= f"{filename}.txt",
                 type="primary"
             )
 
         if option == 'JSON ver 3':
             json_data = to_json_pref_3(df)
-
-            ##### creating JSON file !!! ######
+            json_str = json.dumps(json_data, indent=4)
+            json_bytes = json_str.encode('utf-8')
 
             st.write(f"The JSON file will be named: **{filename}.txt**")
 
             # Provide a download button for the resulting dataframe
             st.download_button(
                 label="Download JSON as text file",
-                data=json_data,
+                data=json_bytes,
                 file_name= f"{filename}.txt",
                 type="primary"
             )
