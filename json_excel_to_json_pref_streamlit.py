@@ -192,7 +192,7 @@ st.title("Creating frequencies using JSON & MOT Excel")
 # File uploaders
 json_file = st.file_uploader("Upload JSON File", type="json")
 service_name = st.text_input("Enter the service you would like to create the frequencies to", "Service name")
-st.write(f"Service name: **{filename}**")
+st.write(f"Service name: **{service_name}**")
 
 excel_file = st.file_uploader("Upload Excel File", type="xlsx")
 
