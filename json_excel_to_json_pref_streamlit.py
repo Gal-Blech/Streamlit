@@ -190,11 +190,13 @@ def to_json_pref_3(df):
 st.title("Creating frequencies using JSON & MOT Excel")
 
 # File uploaders
-json_file = st.file_uploader("Upload JSON File", type="json")
-service_name = st.text_input("Enter the service you would like to create the frequencies to", "Service name")
-st.write(f"Service name: **{service_name}**")
+with st.container(border=True):
+    json_file = st.file_uploader("Upload JSON File", type="json")
+    service_name = st.text_input("Enter the service you would like to create the frequencies to", "Service name")
+    st.write(f"Service name: **{service_name}**")
 
-excel_file = st.file_uploader("Upload Excel File", type="xlsx")
+with st.container(border=True):
+    excel_file = st.file_uploader("Upload Excel File", type="xlsx")
 
 if json_file and excel_file:
     df = process_files(json_file, excel_file)
