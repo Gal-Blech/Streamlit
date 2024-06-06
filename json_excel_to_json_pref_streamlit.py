@@ -211,7 +211,7 @@ if json_file and excel_file:
                placeholder="Select file type",
             )
     
-            filename = st.text_input("Output File Name", "processed_data")
+            filename = st.text_input("Output File Name", placeholder="File name")
             
             if option == 'Excel':
                 # Convert DataFrame to a binary stream
