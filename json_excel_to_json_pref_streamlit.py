@@ -17,7 +17,7 @@ def process_files(json_file, excel_file):
         # Access the top-level services
         top_level_services = data.get('services', [])
         for service in top_level_services:
-            if service.get('name') == 'SOS':
+            if service.get('name') == service_name:
                 service_id = service.get('id', '')
                 break
         
@@ -191,6 +191,9 @@ st.title("Creating frequencies using JSON & MOT Excel")
 
 # File uploaders
 json_file = st.file_uploader("Upload JSON File", type="json")
+service_name = st.text_input("Enter the service you would like to create the frequencies to", "Service name")
+st.write(f"Service name: **{filename}**")
+
 excel_file = st.file_uploader("Upload Excel File", type="xlsx")
 
 if json_file and excel_file:
