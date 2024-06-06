@@ -199,28 +199,58 @@ if json_file and excel_file:
         st.success("Data processed successfully.")
         st.dataframe(df)
 
-        # Convert DataFrame to a binary stream
-        output = BytesIO()
-        df.to_excel(output, index=False, engine='openpyxl')
-        output.seek(0)
-
-        filename = st.text_input("Output File Name", "processed_data")
-        st.write(f"The Excel file will be named: **{filename}.txt**")
-
-        # Provide a download button for the resulting dataframe
-        st.download_button(
-            label="Download JSON as text file",
-            data=output,
-            file_name= f"{filename}.txt",
-            type="primary"
+        # Provide select box to choose which file to download
+        option = st.selectbox("which file type would you like to download?",
+           ("JSON ver 2", "JSON ver 3", "Excel"),
+           index=None,
+           placeholder="Select file type",
         )
 
+        filename = st.text_input("Output File Name", "processed_data")
+        
+        if option == 'Excel':
+            # Convert DataFrame to a binary stream
+            output = BytesIO()
+            df.to_excel(output, index=False, engine='openpyxl')
+            output.seek(0)
 
-     #   st.selectbox !
-     #   if pref2 ----
-     #      json_data = to_json_pref_2(df)
-     #      
+            st.write(f"The Excel file will be named: **{filename}.xlsx**")
+            
+            # Provide a download button for the resulting dataframe
+            st.download_button(
+                label="Download Excel",
+                data=output,
+                file_name= f"{filename}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                type="primary"
+            )
+        
+        if option == 'JSON ver 2':
+            json_data = to_json_pref_2(df)
 
-     #   if pref3 -----
-     #      json_data = to_json_pref_3(df)
+            ##### creating JSON file !!! ######
 
+            st.write(f"The JSON file will be named: **{filename}.txt**")
+
+            # Provide a download button for the resulting dataframe
+            st.download_button(
+                label="Download JSON as text file",
+                data=output,
+                file_name= f"{filename}.txt",
+                type="primary"
+            )
+
+        if option == 'JSON ver 3':
+            json_data = to_json_pref_3(df)
+
+            ##### creating JSON file !!! ######
+
+            st.write(f"The JSON file will be named: **{filename}.txt**")
+
+            # Provide a download button for the resulting dataframe
+            st.download_button(
+                label="Download JSON as text file",
+                data=output,
+                file_name= f"{filename}.txt",
+                type="primary"
+            )
