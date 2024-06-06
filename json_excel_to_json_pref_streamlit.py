@@ -200,7 +200,7 @@ if json_file and excel_file:
         st.dataframe(df)
 
         # Provide select box to choose which file to download
-        option = st.selectbox("which file type would you like to download?",
+        option = st.selectbox("Which file type would you like to download?",
            ("JSON ver 2", "JSON ver 3", "Excel"),
            index=None,
            placeholder="Select file type",
@@ -235,7 +235,7 @@ if json_file and excel_file:
             # Provide a download button for the resulting dataframe
             st.download_button(
                 label="Download JSON as text file",
-                data=output,
+                data=json_data,
                 file_name= f"{filename}.txt",
                 type="primary"
             )
@@ -250,7 +250,7 @@ if json_file and excel_file:
             # Provide a download button for the resulting dataframe
             st.download_button(
                 label="Download JSON as text file",
-                data=output,
+                data=json_data,
                 file_name= f"{filename}.txt",
                 type="primary"
             )
