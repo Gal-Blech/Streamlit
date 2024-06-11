@@ -38,9 +38,6 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
                 st.write(f"Column's attribute will be: **{'.'.join(path)}**")
                 st.session_state[f'path_{set_index}'] = path
 
-                # Display conclusion path inside the box
-                st.write(f"Conclusion Path: {'.'.join(path)}")
-
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
     st.session_state['dropdown_set_count'] = 0
@@ -58,7 +55,7 @@ if st.button("Add more dropdowns"):
 selected_paths = []
 for i in range(st.session_state['dropdown_set_count'] + 1):
     if f'path_{i}' in st.session_state:
-        selected_paths.append(st.session_state[f'path_{i}'])
+        selected_paths.append('.'.join(st.session_state[f'path_{i}']))
 
 # Display the final paths in a single-row table
 if selected_paths:
