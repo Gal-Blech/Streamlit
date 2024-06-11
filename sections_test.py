@@ -26,16 +26,16 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
     cols = st.session_state[f'columns_{set_index}']
     with cols[level]:
         if isinstance(options, dict):
-            choice = st.selectbox(f"**Level {level + 1} choices**", [""] + list(options.keys()), key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
+            choice = st.selectbox(f"Level {level + 1} choices", [""] + list(options.keys()), key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
                 path = path + [choice]
                 st.session_state[f'path_{set_index}'] = path
                 create_dropdowns(options[choice], level + 1, path, set_index)
         elif isinstance(options, list):
-            choice = st.selectbox(f"**Level {level + 1} choices**", [""] + options, key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
+            choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
                 path = path + [choice]
-                st.write(f"Column's attribute will be: {'.'.join(path)}")
+                st.write(f"Column's attribute will be: **{'.'.join(path)}**")
                 st.session_state[f'path_{set_index}'] = path
 
 # Initialize dropdowns
@@ -43,7 +43,7 @@ if 'dropdown_set_count' not in st.session_state:
     st.session_state['dropdown_set_count'] = 0
 
 for i in range(st.session_state['dropdown_set_count'] + 1):
-    with st.expander(f"Column {i + 1} choices", expanded=True):
+    with st.expander(f"**Column {i + 1} choice**", expanded=True):
         create_dropdowns(choices, level=0, path=[], set_index=i)
 
 # Option to add more dropdown sets
