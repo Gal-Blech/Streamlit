@@ -42,8 +42,9 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
 if 'dropdown_set_count' not in st.session_state:
     st.session_state['dropdown_set_count'] = 0
 
+column_headers = [f"Column {i+1}" for i in range(st.session_state['dropdown_set_count'] + 1)]
 for i in range(st.session_state['dropdown_set_count'] + 1):
-    with st.expander(f"**Column {i + 1} choice**", expanded=True):
+    with st.expander(f"**{column_headers[i]} choice**", expanded=True):
         create_dropdowns(choices, level=0, path=[], set_index=i)
         counter = i + 1
 
@@ -62,4 +63,4 @@ for i in range(st.session_state['dropdown_set_count'] + 1):
 if selected_paths:
     st.write("Selected Paths:")
     st.write(f"{counter}")
-    st.dataframe([selected_paths], hide_index=True, width=None, columns=("col %d" % i for i in range(1,counter+1)))
+    st.dataframe([selected_paths], hide_index=True, width=None, columns=column_headers)
