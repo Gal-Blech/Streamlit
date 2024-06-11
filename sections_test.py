@@ -28,8 +28,3 @@ def create_dropdowns(options, level=0):
 
 # Create columns for horizontal layout
 create_dropdowns(choices)
-
-# Option to add more dropdown sets
-if st.button("Add more dropdowns"):
-    st.write("Adding another set of dropdowns.")
-    create_dropdowns(choices, level=0, path="")
