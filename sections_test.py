@@ -61,5 +61,5 @@ for i in range(st.session_state['dropdown_set_count'] + 1):
 # Display the final paths in a single-row table
 if selected_paths:
     st.write("Selected Paths:")
-    st.write(f"{dropdown_set_count}")
+    st.write(f"{counter}")
     st.dataframe([selected_paths], hide_index=True, width=None)
