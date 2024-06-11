@@ -13,22 +13,24 @@ choices = {
     }
 }
 
-# Recursive function to generate dropdowns in columns
+# Create columns for horizontal layout
 def create_dropdowns(options, level=0, path=[]):
-    if isinstance(options, dict):
-        cols = st.columns(5)  # Adjust the number of columns if needed
-        with cols[level % 5]:  # Ensure we stay within the column range
+    if level == 0:
+        num_levels = 5  # Adjust this based on the maximum depth of your choices
+        st.session_state['columns'] = st.columns(num_levels)
+    
+    cols = st.session_state['columns']
+    with cols[level]:
+        if isinstance(options, dict):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + list(options.keys()), key=f"{'.'.join(path)}_level_{level}")
             if choice:
                 create_dropdowns(options[choice], level + 1, path + [choice])
-    elif isinstance(options, list):
-        cols = st.columns(5)  # Adjust the number of columns if needed
-        with cols[level % 5]:  # Ensure we stay within the column range
+        elif isinstance(options, list):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=f"{'.'.join(path)}_level_{level}")
             if choice:
                 st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
 
-# Create the initial set of dropdowns
+# Initialize dropdowns
 create_dropdowns(choices)
 
 # Option to add more dropdown sets
