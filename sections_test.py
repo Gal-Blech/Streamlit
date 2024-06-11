@@ -28,13 +28,15 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
         if isinstance(options, dict):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + list(options.keys()), key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
-                create_dropdowns(options[choice], level + 1, path + [choice], set_index)
-                st.session_state[f'path_{set_index}'] = path + [choice]
+                path = path + [choice]
+                st.session_state[f'path_{set_index}'] = path
+                create_dropdowns(options[choice], level + 1, path, set_index)
         elif isinstance(options, list):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
-                st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
-                st.session_state[f'path_{set_index}'] = path + [choice]
+                path = path + [choice]
+                st.write(f"Column's attribute will be: {'.'.join(path)}")
+                st.session_state[f'path_{set_index}'] = path
 
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
