@@ -13,27 +13,30 @@ choices = {
     }
 }
 
-# Create columns for horizontal layout
+# Recursive function to generate dropdowns and collect the final path
 def create_dropdowns(options, level=0, path=[]):
-    if level == 0:
-        num_levels = 5  # Adjust this based on the maximum depth of your choices
-        st.session_state['columns'] = st.columns(num_levels)
-    
-    cols = st.session_state['columns']
-    with cols[level]:
+    cols = st.columns(5)  # Adjust the number of columns if needed
+    with cols[level % 5]:
         if isinstance(options, dict):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + list(options.keys()), key=f"{'.'.join(path)}_level_{level}")
             if choice:
-                create_dropdowns(options[choice], level + 1, path + [choice])
+                return create_dropdowns(options[choice], level + 1, path + [choice])
         elif isinstance(options, list):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=f"{'.'.join(path)}_level_{level}")
-            
-    st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
+            if choice:
+                return path + [choice]
+    return path
+
+# Function to initialize and add more dropdown sets
+def add_dropdown_set():
+    path = create_dropdowns(choices)
+    if path:
+        st.write(f"Column's attribute will be: {'.'.join(path)}")
 
 # Initialize dropdowns
-create_dropdowns(choices)
+add_dropdown_set()
 
 # Option to add more dropdown sets
 if st.button("Add more dropdowns"):
     st.write("Adding another set of dropdowns.")
-    create_dropdowns(choices, level=0, path=[])
+    add_dropdown_set()
