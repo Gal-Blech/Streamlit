@@ -62,4 +62,4 @@ for i in range(st.session_state['dropdown_set_count'] + 1):
 if selected_paths:
     st.write("Selected Paths:")
     st.write(f"{counter}")
-    st.dataframe([selected_paths], hide_index=True, width=None)
+    st.dataframe([selected_paths], hide_index=True, width=None, columns=("col %d" % i for i in range(1,counter+1)))
