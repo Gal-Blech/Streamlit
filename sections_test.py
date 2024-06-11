@@ -19,6 +19,8 @@ def get_unique_key(base, index):
 
 # Function to create dropdowns in columns
 def create_dropdowns(options, level=0, path=[], set_index=0):
+    final_path = None  # Initialize final_path
+    
     if level == 0:
         num_levels = 5  # Adjust this based on the maximum depth of your choices
         st.session_state[f'columns_{set_index}'] = st.columns(num_levels)
@@ -37,30 +39,29 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
                 path = path + [choice]
                 st.write(f"Column's attribute will be: **{'.'.join(path)}**")
                 st.session_state[f'path_{set_index}'] = path
-                path_display = path
-    if path:
-        st.write("Current Path:", '.'.join(path))
+    
+    # Store final_path outside the columns
+    if level == 0:
+        final_path = '.'.join(path) if path else None
+    
+    return final_path
 
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
     st.session_state['dropdown_set_count'] = 0
 
+final_paths = []
 for i in range(st.session_state['dropdown_set_count'] + 1):
     with st.expander(f"**Column {i + 1} choice**", expanded=True):
-        create_dropdowns(choices, level=0, path=[], set_index=i)
+        final_path = create_dropdowns(choices, level=0, path=[], set_index=i)
+        if final_path is not None:
+            final_paths.append(final_path)
 
 # Option to add more dropdown sets
 if st.button("Add more dropdowns"):
     st.session_state['dropdown_set_count'] += 1
     st.experimental_rerun()
 
-# Collect the final selected paths
-selected_paths = []
-for i in range(st.session_state['dropdown_set_count'] + 1):
-    if f'path_{i}' in st.session_state:
-        selected_paths.append('.'.join(st.session_state[f'path_{i}']))
-
-# Display the final paths in a single-row table
-if selected_paths:
-    st.write("Selected Paths:")
-    st.dataframe([selected_paths], hide_index=True, width=None)
+# Display the final path
+if final_paths:
+    st.write("Final Path:", '.'.join(final_paths[-1]))
