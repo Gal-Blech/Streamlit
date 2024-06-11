@@ -39,7 +39,10 @@ if 'dropdown_set_count' not in st.session_state:
     st.session_state['dropdown_set_count'] = 0
 
 for i in range(st.session_state['dropdown_set_count'] + 1):
-    create_dropdowns(choices, level=0, path=[], set_index=i)
+    with st.expander(f"Column {i + 1} choices", expanded=True):
+        st.markdown(f"<div style='border: 1px solid #d3d3d3; padding: 10px; border-radius: 5px;'>", unsafe_allow_html=True)
+        create_dropdowns(choices, level=0, path=[], set_index=i)
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # Option to add more dropdown sets
 if st.button("Add more dropdowns"):
