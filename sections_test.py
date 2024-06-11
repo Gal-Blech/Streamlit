@@ -37,7 +37,8 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
                 path = path + [choice]
                 st.write(f"Column's attribute will be: **{'.'.join(path)}**")
                 st.session_state[f'path_{set_index}'] = path
-    st.write(f"Column's attribute is: **{path}**")
+                path_display = path
+    st.write(f"Column's attribute is: **{path_display}**")
 
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
