@@ -17,7 +17,7 @@ choices = {
 def get_unique_key(base, index):
     return f"{base}_{index}"
 
-# Create columns for horizontal layout
+# Function to create dropdowns in columns
 def create_dropdowns(options, level=0, path=[], set_index=0):
     if level == 0:
         num_levels = 5  # Adjust this based on the maximum depth of your choices
@@ -29,10 +29,12 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + list(options.keys()), key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
                 create_dropdowns(options[choice], level + 1, path + [choice], set_index)
+                st.session_state[f'path_{set_index}'] = path + [choice]
         elif isinstance(options, list):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=get_unique_key(f"{'.'.join(path)}_level_{level}", set_index))
             if choice:
                 st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
+                st.session_state[f'path_{set_index}'] = path + [choice]
 
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
@@ -48,3 +50,13 @@ for i in range(st.session_state['dropdown_set_count'] + 1):
 if st.button("Add more dropdowns"):
     st.session_state['dropdown_set_count'] += 1
     st.experimental_rerun()
+
+# Display table with selected values
+selected_values = []
+for i in range(st.session_state['dropdown_set_count'] + 1):
+    if f'path_{i}' in st.session_state:
+        selected_values.append('.'.join(st.session_state[f'path_{i}']))
+
+if selected_values:
+    st.write("Selected Values:")
+    st.table([selected_values])
