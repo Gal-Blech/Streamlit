@@ -51,12 +51,13 @@ if st.button("Add more dropdowns"):
     st.session_state['dropdown_set_count'] += 1
     st.experimental_rerun()
 
-# Display table with selected values
-selected_values = []
+# Collect the final selected paths
+selected_paths = []
 for i in range(st.session_state['dropdown_set_count'] + 1):
     if f'path_{i}' in st.session_state:
-        selected_values.append('.'.join(st.session_state[f'path_{i}']))
+        selected_paths.append('.'.join(st.session_state[f'path_{i}']))
 
-if selected_values:
-    st.write("Selected Values:")
-    st.table([selected_values])
+# Display the final paths in a single-row table
+if selected_paths:
+    st.write("Selected Paths:")
+    st.table([selected_paths])
