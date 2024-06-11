@@ -37,6 +37,7 @@ def create_dropdowns(options, level=0, path=[], set_index=0):
                 path = path + [choice]
                 st.write(f"Column's attribute will be: **{'.'.join(path)}**")
                 st.session_state[f'path_{set_index}'] = path
+    st.write(f"Column's attribute will be: **{'.'.join(path)}**")
 
 # Initialize dropdowns
 if 'dropdown_set_count' not in st.session_state:
@@ -60,4 +61,4 @@ for i in range(st.session_state['dropdown_set_count'] + 1):
 # Display the final paths in a single-row table
 if selected_paths:
     st.write("Selected Paths:")
-    st.dataframe([selected_paths], hide_index=True)
+    st.dataframe([selected_paths], hide_index=True, width=None)
