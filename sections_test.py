@@ -29,6 +29,8 @@ def create_dropdowns(options, level=0, path=[]):
             choice = st.selectbox(f"Level {level + 1} choices", [""] + options, key=f"{'.'.join(path)}_level_{level}")
             if choice:
                 st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
+        st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
+    st.write(f"Column's attribute will be: {'.'.join(path + [choice])}")
 
 # Initialize dropdowns
 create_dropdowns(choices)
